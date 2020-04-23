@@ -434,20 +434,20 @@ class PipelineLint(object):
 
         # Check that the pipeline name starts with nf-core
         try:
-            assert self.config.get('manifest.name', '').strip('\'"').startswith('nf-core/')
+            assert self.config.get('manifest.name', '').strip('\'"').startswith('nibscbioinformatics/')
         except (AssertionError, IndexError):
-            self.failed.append((4, "Config variable 'manifest.name' did not begin with nf-core/:\n    {}".format(self.config.get('manifest.name', '').strip('\'"'))))
+            self.failed.append((4, "Config variable 'manifest.name' did not begin with nibscbioinformatics/:\n    {}".format(self.config.get('manifest.name', '').strip('\'"'))))
         else:
-            self.passed.append((4, "Config variable 'manifest.name' began with 'nf-core/'"))
-            self.pipeline_name = self.config.get('manifest.name', '').strip("'").replace('nf-core/', '')
+            self.passed.append((4, "Config variable 'manifest.name' began with 'nibscbioinformatics/'"))
+            self.pipeline_name = self.config.get('manifest.name', '').strip("'").replace('nibscbioinformatics/', '')
 
         # Check that the homePage is set to the GitHub URL
         try:
-            assert self.config.get('manifest.homePage', '').strip('\'"').startswith('https://github.com/nf-core/')
+            assert self.config.get('manifest.homePage', '').strip('\'"').startswith('https://github.com/nibscbioinformatics/')
         except (AssertionError, IndexError):
-            self.failed.append((4, "Config variable 'manifest.homePage' did not begin with https://github.com/nf-core/:\n    {}".format(self.config.get('manifest.homePage', '').strip('\'"'))))
+            self.failed.append((4, "Config variable 'manifest.homePage' did not begin with https://github.com/nibscbioinformatics/:\n    {}".format(self.config.get('manifest.homePage', '').strip('\'"'))))
         else:
-            self.passed.append((4, "Config variable 'manifest.homePage' began with 'https://github.com/nf-core/'"))
+            self.passed.append((4, "Config variable 'manifest.homePage' began with 'https://github.com/nibscbioinformatics/'"))
 
         # Check that the DAG filename ends in `.svg`
         if 'dag.file' in self.config:
