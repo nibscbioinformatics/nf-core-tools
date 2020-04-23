@@ -29,7 +29,7 @@ class PipelineCreate(object):
     """
     def __init__(self, name, description, author, new_version='1.0dev', no_git=False, force=False, outdir=None):
         self.short_name = name.lower().replace(r'/\s+/', '-').replace('nf-core/', '').replace('/', '-')
-        self.name = 'nf-core/{}'.format(self.short_name)
+        self.name = 'nibscbioinformatics/{}'.format(self.short_name)
         self.name_noslash = self.name.replace('/', '-')
         self.name_docker = self.name.replace('nf-core', 'nfcore')
         self.description = description
