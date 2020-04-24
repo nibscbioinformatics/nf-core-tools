@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 import sys
 
-version = '1.9'
+version = '1.9.5'
 
 with open('README.md') as f:
     readme = f.read()
@@ -17,7 +17,7 @@ setup(
     keywords = ['nf-core', 'nextflow', 'bioinformatics', 'workflow', 'pipeline', 'biology', 'sequencing', 'NGS', 'next generation sequencing'],
     author = 'Phil Ewels',
     author_email = 'phil.ewels@scilifelab.se',
-    url = 'https://github.com/nf-core/tools',
+    url = 'https://github.com/nibscbioinformatics/nf-core-tools',
     license = 'MIT',
     scripts = ['scripts/nf-core'],
     install_requires = [
