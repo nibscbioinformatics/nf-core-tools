@@ -132,20 +132,6 @@ class TestLint(unittest.TestCase):
         bad_lint_obj = nf_core.lint.PipelineLint('/non/existant/path')
         bad_lint_obj.check_nextflow_config()
 
-    def test_actions_wf_branch_pass(self):
-        """Tests that linting for GitHub Actions workflow for branch protection works for a good example"""
-        lint_obj = nf_core.lint.PipelineLint(PATH_WORKING_EXAMPLE)
-        lint_obj.pipeline_name = 'tools'
-        expectations = {"failed": 0, "warned": 0, "passed": 2}
-        self.assess_lint_status(lint_obj, **expectations)
-
-    def test_actions_wf_branch_fail(self):
-        """Tests that linting for GitHub Actions workflow for branch protection fails for a bad example"""
-        lint_obj = nf_core.lint.PipelineLint(PATH_FAILING_EXAMPLE)
-        lint_obj.pipeline_name = 'tools'
-        expectations = {"failed": 2, "warned": 0, "passed": 0}
-        self.assess_lint_status(lint_obj, **expectations)
-
     def test_actions_wf_ci_pass(self):
         """Tests that linting for GitHub Actions CI workflow works for a good example"""
         lint_obj = nf_core.lint.PipelineLint(PATH_WORKING_EXAMPLE)
