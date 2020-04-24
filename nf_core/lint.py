@@ -166,7 +166,6 @@ class PipelineLint(object):
             'check_licence',
             'check_docker',
             'check_nextflow_config',
-            'check_actions_branch_protection',
             'check_actions_ci',
             'check_actions_lint',
             'check_readme',
