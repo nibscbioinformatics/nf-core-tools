@@ -495,34 +495,6 @@ class PipelineLint(object):
             else:
                 self.passed.append((4, "Config variable manifest.version does not contain 'dev' for release: '{}'".format(self.config['manifest.version'])))
 
-    def check_actions_branch_protection(self):
-        """Checks that the GitHub Actions branch protection workflow is valid.
-
-        Makes sure PRs can only come from nf-core dev or 'patch' of a fork.
-        """
-        fn = os.path.join(self.path, '.github', 'workflows', 'branch.yml')
-        if os.path.isfile(fn):
-            with open(fn, 'r') as fh:
-                branchwf = yaml.safe_load(fh)
-
-            # Check that the action is turned on for PRs to master
-            try:
-                assert('master' in branchwf[True]['pull_request']['branches'])
-            except (AssertionError, KeyError):
-                self.failed.append((5, "GitHub Actions 'branch' workflow should be triggered for PRs to master: '{}'".format(fn)))
-            else:
-                self.passed.append((5, "GitHub Actions 'branch' workflow is triggered for PRs to master: '{}'".format(fn)))
-
-            # Check that PRs are only ok if coming from an nf-core `dev` branch or a fork `patch` branch
-            PRMasterCheck = "{{ [[ $(git remote get-url origin) == *nf-core/{} ]] && [[ ${{GITHUB_HEAD_REF}} = \"dev\" ]]; }} || [[ ${{GITHUB_HEAD_REF}} == \"patch\" ]]".format(self.pipeline_name.lower())
-            steps = branchwf['jobs']['test']['steps']
-            try:
-                steps = branchwf['jobs']['test']['steps']
-                assert(any([PRMasterCheck in step.get('run', []) for step in steps]))
-            except (AssertionError, KeyError):
-                self.failed.append((5, "GitHub Actions 'branch' workflow should check that forks don't submit PRs to master: '{}'".format(fn)))
-            else:
-                self.passed.append((5, "GitHub Actions 'branch' workflow checks that forks don't submit PRs to master: '{}'".format(fn)))
 
     def check_actions_ci(self):
         """Checks that the GitHub Actions CI workflow is valid
